@@ -1,4 +1,4 @@
-FROM google/dart
+FROM google/dart:1.6.0
 
 WORKDIR /app
 ONBUILD ADD pubspec.yaml /app/
