@@ -10,7 +10,7 @@ void main() {
     HttpServer.bind('0.0.0.0', 8080).then((server) {
       server.listen((request) {
           if (request.uri.path == '/') {
-            request.response.redirect('/index.html');
+            request.response.redirect(request.uri.resolve('/index.html'));
           } else if (request.uri.path == '/version') {
             request.response.headers..contentType = ContentType.TEXT;
             request.response

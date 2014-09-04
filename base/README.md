@@ -43,7 +43,7 @@ exposing a server at port 8080 you should consider using the base image
 
 ## Why run `pub get` twice
 
-When a Docker image is build symbolic links are not folowed. This means that
+When a Docker image is build, symbolic links are not followed. This means that
 when the `package` directory is added it will contain sym-links to the host
 cache. These sym-links will be broken.
 

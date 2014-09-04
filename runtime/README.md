@@ -2,12 +2,12 @@
 
 [`google/dart-runtime`](https://index.docker.io/u/google/dart-runtime)
 is a [docker](https://docker.io) base image that makes it easy to dockerize
-standard [Dart](https://dartlang.org) application.
+a standard [Dart](https://dartlang.org) application.
 
 It can automatically bundle a Dart application and its dependencies with
 a single line Dockerfile.
 
-It is based on [`google/dart`](https://index.docker.io/u/google/dart) base
+It is based on the [`google/dart`](https://index.docker.io/u/google/dart) base
 image.
 
 ## Usage
