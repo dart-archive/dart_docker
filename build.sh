@@ -4,7 +4,7 @@
 # This is only used to test the Docker images locally. For distribution
 # the automated builds on hub.docker.com is used.
 VERSION=1.6.0
-REPOSITORY_PREFIX=google-test
+REPOSITORY_PREFIX=google_test
 docker build -t $REPOSITORY_PREFIX/dart base
 docker tag $REPOSITORY_PREFIX/dart $REPOSITORY_PREFIX/dart:$VERSION
 docker build -t $REPOSITORY_PREFIX/dart-runtime runtime
