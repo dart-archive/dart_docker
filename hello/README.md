@@ -21,7 +21,24 @@ hosts address on that network.
 
     curl http://`boot2docker ip 2> /dev/null`:8080/version
 
-If you are running the docker daemon directly on a Linux host you can
+If you are running the docker daemon directly on a Linux host, you can
 access the server on `localhost`
 
     curl http://localhost:8080/version
+
+## Access the Observatory
+
+If you want to access the Observatory as well as the server
+application also map port 8181 to the host.
+
+    docker run -d -p 8080:8080 -p 8181:8181 google/dart-hello
+
+If you are using boot2docker the following command will give the URL of
+the Observatory:
+
+    echo http://$(boot2docker ip 2> /dev/null):8181/
+
+If you are running the docker daemon directly on a Linux host, the
+URL of the Observatory is:
+
+    http://localhost:8181/

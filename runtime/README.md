@@ -52,3 +52,21 @@ The image assumes that your application:
 When building your application docker image, `ONBUILD` triggers fetch the
 dependencies listed in `pubspec.yaml` and `pubspec.yaml` and cache them
 appropriatly.
+
+## Accessing the Observatory
+
+The `dart-runtime` image enables the
+[Observatory](https://www.dartlang.org/tools/observatory/) for the  Dart
+VM running in the container. The Observatory is listening on the default
+port 8181. Just map that port to the host when running the app:
+
+    docker run -d -p 8080:8080 -p 8181:8181 my-app
+
+## Passing VM flags
+
+The `dart-runtime` image can receive options for the Dart VM through
+the environment variable `DART_VM_OPTIONS`.
+
+    docker run -d -p 8080:8080 \
+        --env DART_VM_OPTIONS='--old_gen_heap_size=2048 --verbose-gc' \
+        my-app
