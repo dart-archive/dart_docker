@@ -3,7 +3,11 @@
 # BSD-style license that can be found in the LICENSE file.
 FROM google/debian:wheezy
 
+ENV DART_VERSION 1.7.2
+ENV DART_PACKAGE dart_$DART_VERSION-1_amd64.deb
+ENV DART_REVISION 41096
+
 RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl
-RUN curl -q -O http://storage.googleapis.com/dart-archive/channels/stable/release/39553/linux_packages/debian_wheezy/dart_1.6.0-1_amd64.deb && dpkg -i dart_1.6.0-1_amd64.deb && rm dart_1.6.0-1_amd64.deb
+RUN curl -q -O http://storage.googleapis.com/dart-archive/channels/stable/release/$DART_REVISION/linux_packages/debian_wheezy/$DART_PACKAGE && dpkg -i $DART_PACKAGE && rm $DART_PACKAGE
 
 ENV PATH /usr/lib/dart/bin:$PATH
