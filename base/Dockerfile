@@ -4,10 +4,12 @@
 FROM google/debian:wheezy
 
 ENV DART_VERSION 1.7.2
-ENV DART_PACKAGE dart_$DART_VERSION-1_amd64.deb
-ENV DART_REVISION 41096
 
-RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl
-RUN curl -q -O http://storage.googleapis.com/dart-archive/channels/stable/release/$DART_REVISION/linux_packages/debian_wheezy/$DART_PACKAGE && dpkg -i $DART_PACKAGE && rm $DART_PACKAGE
+RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl ca-certificates apt-transport-https
+RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
+  apt-get update && \
+  apt-get install dart=$DART_VERSION-1 && \
+  rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/lib/dart/bin:$PATH
