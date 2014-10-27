@@ -12,4 +12,5 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
   apt-get install dart=$DART_VERSION-1 && \
   rm -rf /var/lib/apt/lists/*
 
-ENV PATH /usr/lib/dart/bin:$PATH
+ENV DART_SDK /usr/lib/dart
+ENV PATH $DART_SDK/bin:$PATH
