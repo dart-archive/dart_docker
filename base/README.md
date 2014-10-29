@@ -22,7 +22,7 @@ a `Dockerfile` in this application directory with the following content:
     ADD pubspec.lock /app/
     RUN pub get
     ADD . /app
-    RUN pub get
+    RUN pub get --offline
 
     CMD []
     ENTRYPOINT ["/usr/bin/dart", "/app/main.dart"]

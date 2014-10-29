@@ -13,7 +13,7 @@ ONBUILD ADD pubspec.yaml /app/
 ONBUILD ADD pubspec.lock /app/
 ONBUILD RUN pub get
 ONBUILD ADD . /app/
-ONBUILD RUN pub get
+ONBUILD RUN pub get --offline
 
 # Expose ports for debugger (5858), application traffic (8080)
 # and the observatory (8181)
