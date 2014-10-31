@@ -5,7 +5,7 @@ FROM google/debian:wheezy
 
 ENV DART_VERSION 1.7.2
 
-RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl ca-certificates apt-transport-https
+RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl git ca-certificates apt-transport-https
 RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
   apt-get update && \
