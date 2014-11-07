@@ -3,7 +3,7 @@
 #
 # This is only used to test the Docker images locally. For distribution
 # the automated builds on hub.docker.com is used.
-VERSION=1.7.2
+VERSION=1.8.0-dev.2.0
 REPOSITORY_PREFIX=google_test
 echo 'Building base'
 docker build -t $REPOSITORY_PREFIX/dart base
