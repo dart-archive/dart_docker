@@ -42,3 +42,36 @@ If you are running the docker daemon directly on a Linux host, the
 URL of the Observatory is:
 
     http://localhost:8181/
+
+## Running on Google Cloud Platform
+
+The Google Cloud Platform have support for
+[Container-optimized Google Compute Engine images](https://cloud.google.com/compute/docs/containers/container_vms),
+which is Google Compute Engine extending its support for Docker containers.
+
+If you are using a Google Cloud project you can deploy to a container VM
+using the [`gcloud`](https://cloud.google.com/sdk/) tool. First create a
+container manifest file called `container.yaml` with the following content:
+
+    version: v1beta2
+    containers:
+      - name: dart-hello
+        image: google/dart-hello
+        ports:
+          - name: dart-hello
+            hostPort: 80
+            containerPort: 8080
+
+Then create and start a Compute Engine VM with the configuration
+specified in `container.yaml` by running the following command:
+
+    $ gcloud compute instances create dart-hello \
+        --image container-vm-v20141016 \
+        --image-project google-containers \
+        --machine-type f1-micro
+        --metadata-from-file google-container-manifest=container.yaml
+        --tag http-server
+
+When the command completes, the external IP address of the new server is
+displayed. Navigate you browser to http://<server IP>/. It might take a few
+minutes for the VM to pull the image and start the container.
