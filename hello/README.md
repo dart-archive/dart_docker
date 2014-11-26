@@ -43,14 +43,14 @@ URL of the Observatory is:
 
     http://localhost:8181/
 
-## Running on Google Cloud Platform
+## Running on Google Compute Engine
 
-The Google Cloud Platform have support for
-[Container-optimized Google Compute Engine images](https://cloud.google.com/compute/docs/containers/container_vms),
+The Google Compute Engine have support for
+[Container-optimized Google Compute Engine images][1],
 which is Google Compute Engine extending its support for Docker containers.
 
 If you are using a Google Cloud project you can deploy to a container VM
-using the [`gcloud`](https://cloud.google.com/sdk/) tool. First create a
+using the [`gcloud`][3] tool. First create a
 container manifest file called `container.yaml` with the following content:
 
     version: v1beta2
@@ -75,3 +75,40 @@ specified in `container.yaml` by running the following command:
 When the command completes, the external IP address of the new server is
 displayed. Navigate you browser to http://<server IP>/. It might take a few
 minutes for the VM to pull the image and start the container.
+
+## Running on Google Container Engine
+
+The Google Cloud Platform has an Alpha release of [Google Container Engine][2],
+which can also be used to run Docker containers. See the documentation for
+more information on the capabilities of Container Engine.
+
+If you are using a Google Cloud project you can create a Container Engine
+cluster and deploy to it using the [`gcloud`][3]
+tool.
+
+    $ gcloud preview container clusters create dart-hello \
+        --num-nodes 1
+    $ gcloud preview container pods create dart-hello \
+        --image=google/dart-hello \
+        --port=8080
+    $ gcloud compute firewall-rules create hello-dart-node-8080 \
+        --allow tcp:8080 \
+        --target-tags k8s-hello-dart-node
+
+The first command creates a cluster with just one node. The second creates
+a "pod" (which is a group of containers) inside that cluster
+running the Docker image `google/dart-hello`. The last command will open
+the firewall for traffic on port `8080` providing public access to the
+Dart server.
+
+To discover the public IP address of the Dart server, run this command:
+
+    $ gcloud preview container pods describe dart-hello
+
+The IP address is displayed as part of the `Host` column in the output.
+Navigate you browser to http://<server IP>:8080/. It might take a few
+minutes for the VM to pull the image and start the "pod".
+
+[1]: https://cloud.google.com/compute/docs/containers/container_vms
+[2]: https://cloud.google.com/container-engine/docs/
+[3]: https://cloud.google.com/sdk/
