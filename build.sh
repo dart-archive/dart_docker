@@ -8,9 +8,6 @@ REPOSITORY_PREFIX=google_test
 echo 'Building base'
 docker build -t $REPOSITORY_PREFIX/dart base
 docker tag $REPOSITORY_PREFIX/dart $REPOSITORY_PREFIX/dart:$VERSION
-echo 'Building appengine'
-docker build -t $REPOSITORY_PREFIX/dart-appengine appengine
-docker tag $REPOSITORY_PREFIX/dart-appengine $REPOSITORY_PREFIX/dart-appengine:$VERSION
 echo 'Building runtime'
 docker build -t $REPOSITORY_PREFIX/dart-runtime runtime
 docker tag $REPOSITORY_PREFIX/dart-runtime $REPOSITORY_PREFIX/dart-runtime:$VERSION
