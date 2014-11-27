@@ -4,7 +4,7 @@ packages:
   http_server:
     description: http_server
     source: hosted
-    version: "0.9.3"
+    version: "0.9.5+1"
   mime:
     description: mime
     source: hosted

@@ -45,7 +45,7 @@ URL of the Observatory is:
 
 ## Running on Google Compute Engine
 
-The Google Compute Engine have support for
+The Google Compute Engine has support for
 [Container-optimized Google Compute Engine images][1],
 which is Google Compute Engine extending its support for Docker containers.
 

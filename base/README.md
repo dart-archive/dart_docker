@@ -25,11 +25,11 @@ a `Dockerfile` in this application directory with the following content:
     RUN pub get --offline
 
     CMD []
-    ENTRYPOINT ["/usr/bin/dart", "/app/main.dart"]
+    ENTRYPOINT ["/usr/bin/dart", "main.dart"]
 
 See below for the reason for running `pub get` twice.
 
-To build the a docker image tagged with `my/app` run:
+To build a docker image tagged with `my/app` run:
 
     docker build -t my/app .
 

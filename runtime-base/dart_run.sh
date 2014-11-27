@@ -20,4 +20,4 @@ fi
      ${DBG_OPTION} \
      --enable-vm-service:8181/0.0.0.0 \
      ${DART_VM_OPTIONS} \
-     /app/bin/server.dart
+     bin/server.dart
