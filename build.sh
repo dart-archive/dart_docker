@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Build the Docker images for Dart.
 #
 # This is only used to test the Docker images locally. For distribution
@@ -12,22 +12,24 @@ function pull_base_image {
 
 VERSION=1.7.2
 REPOSITORY_PREFIX=google_test
+REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")
+
 echo 'Building base'
 # TODO: Change this to use the --pull option to docker build when that is
 # released.
-pull_base_image base/Dockerfile
-docker build -t $REPOSITORY_PREFIX/dart base
+pull_base_image $REPO_ROOT/base/Dockerfile
+docker build -t $REPOSITORY_PREFIX/dart $REPO_ROOT/base
 docker tag $REPOSITORY_PREFIX/dart $REPOSITORY_PREFIX/dart:$VERSION
 echo 'Building runtime-base'
-docker build -t $REPOSITORY_PREFIX/dart-runtime-base runtime-base
+docker build -t $REPOSITORY_PREFIX/dart-runtime-base $REPO_ROOT/runtime-base
 docker tag $REPOSITORY_PREFIX/dart-runtime-base \
     $REPOSITORY_PREFIX/dart-runtime-base:$VERSION
 echo 'Building runtime'
-docker build -t $REPOSITORY_PREFIX/dart-runtime runtime
+docker build -t $REPOSITORY_PREFIX/dart-runtime $REPO_ROOT/runtime
 docker tag $REPOSITORY_PREFIX/dart-runtime $REPOSITORY_PREFIX/dart-runtime:$VERSION
 echo 'Building hello'
-cd hello
+pushd $REPO_ROOT/hello
 pub update
-cd ..
-docker build -t $REPOSITORY_PREFIX/dart-hello hello
+popd
+docker build -t $REPOSITORY_PREFIX/dart-hello $REPO_ROOT/hello
 docker tag $REPOSITORY_PREFIX/dart-hello $REPOSITORY_PREFIX/dart-hello:$VERSION
