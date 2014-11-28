@@ -3,7 +3,7 @@
 # BSD-style license that can be found in the LICENSE file.
 FROM google/debian:wheezy
 
-ENV DART_VERSION 1.7.2
+ENV DART_VERSION 1.8.0
 
 RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl git ca-certificates apt-transport-https
 RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
