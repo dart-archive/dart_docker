@@ -4,4 +4,4 @@
 #
 # Dockerfile for google/dart-hello
 
-FROM google/dart-runtime
+FROM google/dart-runtime:1.8.0
