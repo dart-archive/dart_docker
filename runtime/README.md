@@ -32,7 +32,7 @@ See the [sources](/hello) for [`google/dart-hello`][4] based on this image.
 
 The image assumes that your application:
 
-- has the `pubspec.yaml` and `pubspec.lock` files listing its dependencies.
+- has the `pubspec.yaml` file listing its dependencies.
 - has a file named `bin/server.dart` as the entrypoint script.
 - listens on port `8080`
 - all dependent packages can be retrieved when building the container
@@ -47,12 +47,10 @@ or [`google/dart`][1].
       server.dart
     packages
       ...
-    pubspec.lock
     pubspec.yaml
 
 When building your application docker image, `ONBUILD` triggers fetch the
-dependencies listed in `pubspec.yaml` and `pubspec.yaml` and cache them
-appropriatly.
+dependencies listed in the `pubspec.yaml` file and cache them appropriatly.
 
 ## Accessing the Observatory
 

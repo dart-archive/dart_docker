@@ -26,7 +26,6 @@ The following directory layout is used:
       app
         bin
           server.dart
-        pubspec.lock
         pubspec.yaml
       pkg
         my-package-1
@@ -73,8 +72,7 @@ following content:
     ADD pkg/my-package-2/pubspec.yaml /project/pkg/my-package-2/
 
     # Template for adding the application and local packages.
-    ADD app/pubspec.yaml /project/app/
-    ADD app/pubspec.lock /project/app/
+    ADD app/pubspec.* /project/app/
     RUN pub get
     ADD . /project
     RUN pub get --offline

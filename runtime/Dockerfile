@@ -8,8 +8,7 @@ FROM google/dart-runtime-base
 
 WORKDIR /app
 
-ONBUILD ADD pubspec.yaml /app/
-ONBUILD ADD pubspec.lock /app/
+ONBUILD ADD pubspec.* /app/
 ONBUILD RUN pub get
 ONBUILD ADD . /app/
 ONBUILD RUN pub get --offline

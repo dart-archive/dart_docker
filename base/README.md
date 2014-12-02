@@ -10,16 +10,15 @@ It serves as a base for the
 
 ## Usage
 
-If you have an application directory with `pubspec.yaml`, `pubspec.lock`
-and the main aplication entry point in `main.dart` you can create
-a `Dockerfile` in this application directory with the following content:
+If you have an application directory with a `pubspec.yaml` file and the
+main aplication entry point in `main.dart` you can create a `Dockerfile`
+in the application directory with the following content:
 
     FROM google/dart
 
     WORKDIR /app
 
-    ADD pubspec.yaml /app/
-    ADD pubspec.lock /app/
+    ADD pubspec.* /app/
     RUN pub get
     ADD . /app
     RUN pub get --offline
@@ -50,9 +49,9 @@ cache. These sym-links will be broken.
 The steps in the `Dockerfile` above will do the following:
 
 * Populate a pub cache in the image at `/var/cache/pub` based on the
-  application `pubspec.yaml` and `pubspec.lock`
+  application `pubspec.yaml` file.
 * Add the application files including the `package` directory with broken
-  sym-links
+  sym-links.
 * Run pub get again to fix the sym-links in the `package` directory to the
   image cache.
 
