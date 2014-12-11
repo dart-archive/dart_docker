@@ -10,8 +10,8 @@ function pull_base_image {
   docker pull $BASE_IMAGE
 }
 
-VERSION=1.8.0
-REPOSITORY_PREFIX=google_test
+VERSION=1.8.3
+REPOSITORY_PREFIX=google
 REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")
 
 echo 'Building base'
