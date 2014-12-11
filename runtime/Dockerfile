@@ -4,7 +4,7 @@
 #
 # Dockerfile for google/dart-runtime
 
-FROM google/dart-runtime-base
+FROM google/dart-runtime-base:1.8.3
 
 WORKDIR /app
 
