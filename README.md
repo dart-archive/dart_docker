@@ -9,7 +9,7 @@ This repository contains the sources for the following
 - [`google/dart-runtime`](/runtime)
 - [`google/dart-hello`](/hello)
 
-## Preparing deployment
+## Deployment of a new version
 
 Currently these images are build automatically on the official Docker
 registry https://registry.hub.docker.com/repos/google/ using the
@@ -43,6 +43,30 @@ However there is currently a manual procedure in preparing this.
     $ docker run -d -p 8080:8080 google/dart-hello
     $ curl http://$(boot2docker ip):8080/version
 
+8. Setup new branch with Dockerfiles using the versioned images
+
+  * Create a new branch on GitHub with the same name as the version
+  * Check out that branch
+
+    $ git branch xxx origin/1.8.3
+    $ git checkout xxx
+
+  * Add `:<version>` to the `FROM` line in the `Dockerfile` in
+    `runtime-base`, `runtime` and `hello`.
+  * Push the change to the branch.
+
+    $ git push
+
+9. Setup automatic build for the branch
+
+  * Open [https://registry.hub.docker.com/u/google/dart-runtime-base/][1].
+  * Under _Settings_ go to _Automated Build_.
+  * Setup an additional automated build.
+  * Repeat for `runtime` and `hello`.
+
+10. At some point get rid of this procedure, and push the local builds instead
+of using hub.docker.com automated builds
+
 ## Local testing
 
 For testing the images the script `build.sh` can be used. It will build the
@@ -51,3 +75,5 @@ images locally in the `google_test` namespace. Note when using this script the
 
 For testing with a custom build of Dart where an already built Dart .deb file
 is used the script `build_custom.sh` can be used.
+
+[1]
