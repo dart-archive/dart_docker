@@ -34,7 +34,7 @@ The following directory layout is used:
 The top-level directory `project` contains the `Dockerfile` and the two
 directories `app` and `pkg`. The `app` directory contains a Dart application
 with the main entrypoint in `bin/server.dart`. The packages referred from
-`app/packages.yaml` must be either packages on pub.dartlang.org or packages
+`app/pubspec.yaml` must be either packages on pub.dartlang.org or packages
 in the `pkg` directory referred to using a relative `path` dependency,
 like this:
 
@@ -63,7 +63,7 @@ You can also use `dependency_overrides` like this:
 Then create a `Dockerfile` in your Dart application directory with the
 following content:
 
-    FROM google_test/dart-runtime-base
+    FROM google/dart-runtime-base
 
     WORKDIR /project/app
 
