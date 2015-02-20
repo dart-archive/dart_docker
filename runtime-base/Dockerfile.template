@@ -4,7 +4,7 @@
 #
 # Dockerfile for google/dart-runtime-base
 
-FROM google/dart
+FROM {{NAMESPACE}}/dart
 
 ADD dart_run.sh /dart_runtime/
 RUN chmod 755 /dart_runtime/dart_run.sh && \

@@ -8,8 +8,8 @@ packages:
   mime:
     description: mime
     source: hosted
-    version: "0.9.1"
+    version: "0.9.3"
   path:
     description: path
     source: hosted
-    version: "1.3.0"
+    version: "1.3.3"

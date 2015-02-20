@@ -4,7 +4,7 @@
 #
 # Dockerfile for google/dart-runtime
 
-FROM google/dart-runtime-base
+FROM {{NAMESPACE}}/dart-runtime-base
 
 WORKDIR /app
 

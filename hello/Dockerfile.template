@@ -4,4 +4,4 @@
 #
 # Dockerfile for google/dart-hello
 
-FROM google/dart-runtime
+FROM {{NAMESPACE}}/dart-runtime

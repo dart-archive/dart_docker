@@ -11,6 +11,30 @@ This repository contains the sources for the following
 
 ## Deployment of a new version
 
+The script `build-push.sh` will take care of building images and pushing to
+the official Docker registry.
+
+To push a new version do the following:
+
+1. Update `VERSION` in `build-push.sh`
+
+2. Run `build-push.sh`
+
+If you want to dry-run using another namespace than `google` you can
+change `NAMESPACE` in `build-push.sh` before runnning it.
+
+The script will only push the `:latest` tag if the version is a stable
+version. For developer versions only the version tag vill be pushed.
+
+NOTE: Any stable version will push the `:latest` tag, so beware
+if building for an older stable version.
+
+NOTE: Even though the script will only push the `:latest` tag for
+stable versions the `:latest` tag in the local repository is updated
+when building and pushing developer versions.
+
+### Deprecated procedure - remove when the above is in place
+
 Currently these images are build automatically on the official Docker
 registry https://registry.hub.docker.com/repos/google/ using the
 "Automated build" feature.
