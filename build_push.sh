@@ -12,7 +12,7 @@
 # installed from the Debian repository.
 #
 # For developer versions (versions which contain '-dev' the
-# 'latest' tag will not be pushed.
+# 'latest' tag will not be pushed, instead a 'dev' tag will be pushed.
 #
 # To test without pushing to the official google namespace change the
 # NAMESPACE variable below to some other namespace on hub.docker.com.
@@ -66,6 +66,24 @@ function is_not_dev_version {
   string_not_contains '-dev' $VERSION
 }
 
+# Places the tags into an array at IMAGE_TAGS.
+#
+# By default the image will be tagged as the version specified as well as the
+# major.minor. For stable it will also tag as major. For dev it will tag as dev.
+function get_tags {
+  IMAGE_TAGS=(
+    $NAMESPACE/$IMAGE:$VERSION
+    $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION
+  )
+
+  if is_not_dev_version;
+  then
+    IMAGE_TAGS+=($NAMESPACE/$IMAGE:$MAJOR_VERSION)
+  else
+    IMAGE_TAGS+=($NAMESPACE/$IMAGE:dev)
+  fi
+}
+
 # Validate that the Dart VM in the image has the expected version.
 function validate_version {
   IMAGE=$1
@@ -85,6 +103,7 @@ function validate_version {
 function build_and_tag {
   DIRECTORY=$1
   IMAGE=$2
+  get_tags $IMAGE
 
   echo "Building $DIRECTORY with tags $NAMESPACE/$IMAGE" \
        " and $NAMESPACE/$IMAGE:$VERSION"
@@ -96,7 +115,11 @@ function build_and_tag {
 
   # Build and tag.
   docker build -t $NAMESPACE/$IMAGE $REPO_ROOT/$DIRECTORY
-  docker tag $NAMESPACE/$IMAGE $NAMESPACE/$IMAGE:$VERSION
+
+  for i in "${IMAGE_TAGS[@]}"
+  do
+    docker tag $NAMESPACE/$IMAGE $i
+  done
 
   # Check the Dart version in the image.
   validate_version $IMAGE
@@ -105,14 +128,19 @@ function build_and_tag {
 
 function push_image {
   IMAGE=$1
+  get_images $IMAGE
 
+  # Add the latest tag to the push
   if is_not_dev_version;
   then
-    echo "Pushing $NAMESPACE/$IMAGE:latest"
-    docker push $NAMESPACE/$IMAGE:latest
+    IMAGE_TAGS+=($NAMESPACE/$IMAGE:latest)
   fi
-  echo "Pushing $NAMESPACE/$IMAGE:$VERSION"
-  docker push $NAMESPACE/$IMAGE:$VERSION
+
+  for i in "${IMAGE_TAGS[@]}"
+  do
+    echo "Pushing $i"
+    docker push $i
+  done
 }
 
 # Expect two arguments, namespace and version
@@ -123,6 +151,9 @@ fi
 
 NAMESPACE=$1
 VERSION=$2
+
+# Read the version string. Patch is not used but is there to split the minor
+IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$VERSION"
 
 # Make sure the latest version of the base image is present.
 BASE_IMAGE=$(base_image $REPO_ROOT/base/Dockerfile.template)
