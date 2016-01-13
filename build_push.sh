@@ -128,7 +128,7 @@ function build_and_tag {
 
 function push_image {
   IMAGE=$1
-  get_images $IMAGE
+  get_tags $IMAGE
 
   # Add the latest tag to the push
   if is_not_dev_version;
