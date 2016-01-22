@@ -73,14 +73,19 @@ function is_not_dev_version {
 function get_tags {
   IMAGE_TAGS=(
     $NAMESPACE/$IMAGE:$VERSION
-    $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION
   )
 
   if is_not_dev_version;
   then
-    IMAGE_TAGS+=($NAMESPACE/$IMAGE:$MAJOR_VERSION)
+    IMAGE_TAGS+=(
+      $NAMESPACE/$IMAGE:$MAJOR_VERSION
+      $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION
+    )
   else
-    IMAGE_TAGS+=($NAMESPACE/$IMAGE:dev)
+    IMAGE_TAGS+=(
+      $NAMESPACE/$IMAGE:dev
+      $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION-dev
+    )
   fi
 }
 
@@ -109,7 +114,7 @@ function build_and_tag {
        " and $NAMESPACE/$IMAGE:$VERSION"
   # Create Dockerfile from template.
   sed -e s/{{VERSION}}/$VERSION/ \
-      -e s/{{NAMESPACE}}/$NAMESPACE/ \
+      -e s/{{NAMESPACE}}/${NAMESPACE//\//\\/}/ \
       $REPO_ROOT/$DIRECTORY/Dockerfile.template > \
       $REPO_ROOT/$DIRECTORY/Dockerfile
 
@@ -118,7 +123,7 @@ function build_and_tag {
 
   for i in "${IMAGE_TAGS[@]}"
   do
-    docker tag $NAMESPACE/$IMAGE $i
+    docker tag -f $NAMESPACE/$IMAGE $i
   done
 
   # Check the Dart version in the image.
