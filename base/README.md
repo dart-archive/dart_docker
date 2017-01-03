@@ -11,7 +11,7 @@ It serves as a base for the
 ## Usage
 
 If you have an application directory with a `pubspec.yaml` file and the
-main aplication entry point in `main.dart` you can create a `Dockerfile`
+main application entry point in `main.dart` you can create a `Dockerfile`
 in the application directory with the following content:
 
     FROM google/dart
