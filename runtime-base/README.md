@@ -131,7 +131,7 @@ You can pass VM flags by adding the following to the `app.yaml` file:
       DART_VM_OPTIONS: --old_gen_heap_size=2048 --verbose-gc
 
 
-[1]: https://index.docker.io/u/google/dart
-[2]: https://index.docker.io/u/google/dart-runtime-base
-[3]: https://index.docker.io/u/google/dart-runtime
-[4]: https://index.docker.io/u/google/dart-hello
+[1]: https://hub.docker.com/r/google/dart
+[2]: https://hub.docker.com/r/google/dart-runtime-base
+[3]: https://hub.docker.com/r/google/dart-runtime
+[4]: https://hub.docker.com/r/google/dart-hello
