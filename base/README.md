@@ -1,8 +1,8 @@
 # google/dart
 
 [`google/dart`](https://hub.docker.com/r/google/dart) is a
-[docker](https://docker.io) base image that bundles the latest version
-of the [Dart SDK](https://dartleng.org) installed from
+[docker](https://docker.com) base image that bundles the latest version
+of the [Dart SDK](https://dartlang.org) installed from
 [dartlang.org](https://www.dartlang.org/tools/download.html).
 
 It serves as a base for the
