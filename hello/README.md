@@ -1,10 +1,10 @@
 # google/dart-hello
 
-[`google/dart-hello`](https://index.docker.io/u/google/dart-hello) is a
+[`google/dart-hello`](https://hub.docker.com/r/google/dart-hello) is a
 [docker](https://docker.io) image for a simple Dart HTTP server.
 
 It is based on
-[`google/dart-runtime`](https://index.docker.io/u/google/dart-runtime)
+[`google/dart-runtime`](https://hub.docker.com/r/google/dart-runtime)
 base image and listen on port `8080`.
 
 ## Run the Dart HTTP server in the docker container
