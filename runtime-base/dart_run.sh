@@ -16,7 +16,7 @@ if [ -n "$DART_VM_OPTIONS" ]; then
   echo "Starting Dart with additional options $DART_VM_OPTIONS"
 fi
 
-/usr/bin/dart \
+exec /usr/bin/dart \
      ${DBG_OPTION} \
      --enable-vm-service:8181/0.0.0.0 \
      ${DART_VM_OPTIONS} \
