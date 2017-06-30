@@ -123,7 +123,7 @@ function build_and_tag {
 
   for i in "${IMAGE_TAGS[@]}"
   do
-    docker tag -f $NAMESPACE/$IMAGE $i
+    docker tag $NAMESPACE/$IMAGE $i
   done
 
   # Check the Dart version in the image.

@@ -11,13 +11,13 @@ This repository contains the sources for the following
 
 ## Deployment of a new version
 
-The script `build-push.sh` will take care of building images and pushing to
+The script `build_push.sh` will take care of building images and pushing to
 them the official Docker registry.
 
 To push a new version run the following command:
 
 ```
-$ ./build-push.sh <namespace> <version>
+$ ./build_push.sh <namespace> <version>
 ```
 
 For the official image use the namespace `google`. For testing use a
@@ -27,7 +27,7 @@ want to build and push, e.g. `1.9.3` or `1.10.0-dev-1.0`.
 Push the official images for 1.9.3 like this:
 
 ```
-$ ./build-push.sh google 1.9.3
+$ ./build_push.sh google 1.9.3
 ```
 
 The script will only push the `:latest` tag if the version is a stable
@@ -46,7 +46,7 @@ when building and pushing developer versions.
 
 ## Local testing
 
-The `build-push.sh` script can also be used for testing the images. Just pass
+The `build_push.sh` script can also be used for testing the images. Just pass
 a namespace you don't have access to (e.g. `google_test`). Then all the images
 will be build locally, but the push to hub.docker.com will fail.
 
