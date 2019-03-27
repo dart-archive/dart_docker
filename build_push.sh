@@ -95,11 +95,11 @@ function validate_version {
 
   VM_VERSION=$(docker run --entrypoint=/usr/bin/dart \
                $NAMESPACE/$IMAGE --version 2>&1)
-  if string_contains $VERSION "$VM_VERSION";
+  if string_contains $DART_VERSION "$VM_VERSION";
   then
-    echo "Validated $VERSION in $NAMESPACE/$IMAGE"
+    echo "Validated $DART_VERSION in $NAMESPACE/$IMAGE"
   else
-    echo "Did not find version $VERSION in $IMAGE (found $VM_VERSION)"
+    echo "Did not find version $DART_VERSION in $IMAGE (found $VM_VERSION)"
     exit -1
   fi
 }
@@ -113,7 +113,7 @@ function build_and_tag {
   echo "Building $DIRECTORY with tags $NAMESPACE/$IMAGE" \
        " and $NAMESPACE/$IMAGE:$VERSION"
   # Create Dockerfile from template.
-  sed -e s/{{VERSION}}/$VERSION/ \
+  sed -e s/{{VERSION}}/$DART_VERSION/ \
       -e s/{{NAMESPACE}}/${NAMESPACE//\//\\/}/ \
       $REPO_ROOT/$DIRECTORY/Dockerfile.template > \
       $REPO_ROOT/$DIRECTORY/Dockerfile
@@ -157,8 +157,9 @@ fi
 NAMESPACE=$1
 VERSION=$2
 
-# Read the version string. Patch is not used but is there to split the minor
-IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$VERSION"
+# Read the version string. Patch and build metadata are not used
+IFS='+' read DART_VERSION BUILD_METADATA <<<"$VERSION"
+IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$DART_VERSION"
 
 # Make sure the latest version of the base image is present.
 BASE_IMAGE=$(base_image $REPO_ROOT/base/Dockerfile.template)
