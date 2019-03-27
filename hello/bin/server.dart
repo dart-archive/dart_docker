@@ -12,7 +12,6 @@ void main() {
 
   runZoned(() {
     HttpServer.bind('0.0.0.0', port).then((server) {
-      print('Serving on ${server.address.address}:${server.port}');
       server.listen((request) {
         if (request.uri.path == '/') {
           request.response.redirect(request.uri.resolve('/index.html'));
