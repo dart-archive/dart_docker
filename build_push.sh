@@ -22,13 +22,16 @@ set -e
 REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")
 
 function usage {
-  echo "Usage: $0 <namespace> <version>
+  echo "Usage: $0 <namespace> <version> [tag_version]
 
 <namespace> is the docker namespace (for production this should
 be 'google').
 
 <version> is the dart version that should be built into the
 docker container.
+
+[tag_version] is optional and will be used instead of the dart version
+to tag the images.
 
 This script will build 4 different docker images
 
@@ -148,18 +151,18 @@ function push_image {
   done
 }
 
-# Expect two arguments, namespace and version
-if [ $# -ne 2 ];
+# Expect two or three arguments, namespace dart_version [tag_version]
+if [ $# -ne 2 ] || [ $# -ne 3 ];
 then
   usage
 fi
 
 NAMESPACE=$1
-VERSION=$2
+DART_VERSION=$2
+VERSION=${3:-$DART_VERSION}
 
-# Read the version string. Patch and build metadata are not used
-IFS='+' read DART_VERSION BUILD_METADATA <<<"$VERSION"
-IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$DART_VERSION"
+# Read the version string. Patch version is not used
+IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$VERSION"
 
 # Make sure the latest version of the base image is present.
 BASE_IMAGE=$(base_image $REPO_ROOT/base/Dockerfile.template)
