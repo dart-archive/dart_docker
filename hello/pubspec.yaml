@@ -2,3 +2,4 @@ name: hello
 description: Hello
 dependencies:
   http_server: any
+  pedantic: any
