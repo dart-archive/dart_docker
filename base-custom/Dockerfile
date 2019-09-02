@@ -8,4 +8,4 @@ ADD dart.deb .
 RUN dpkg -i dart.deb && rm dart.deb
 
 ENV DART_SDK /usr/lib/dart
-ENV PATH $DART_SDK/bin:$PATH
+ENV PATH $DART_SDK/bin:/root/.pub-cache/bin:$PATH
