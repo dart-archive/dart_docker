@@ -1,7 +1,7 @@
 # google/dart-runtime
 
 [`google/dart-runtime`][3] is a [docker](https://docker.io) base image that
-makes it easy to dockerize a standard [Dart](https://dartlang.org) application.
+makes it easy to dockerize a standard [Dart](https://dart.dev) application.
 
 It can automatically bundle a Dart application and its dependencies with
 a single line Dockerfile.
@@ -55,7 +55,7 @@ dependencies listed in the `pubspec.yaml` file and cache them appropriatly.
 ## Accessing the Observatory
 
 The `dart-runtime` image enables the
-[Observatory](https://www.dartlang.org/tools/observatory/) for the Dart
+[Observatory](https://dart-lang.github.io/observatory/) for the Dart
 VM running in the container. The Observatory is listening on the default
 port 8181. Just map that port to the host when running the app:
 

@@ -1,7 +1,7 @@
 # google/dart-runtime-base
 
 [`google/dart-runtime-base`][2] is a [docker](https://docker.io) base image that
-makes it easy to dockerize a standard [Dart](https://dartlang.org) application
+makes it easy to dockerize a standard [Dart](https://dart.dev) application
 which is using local packages.
 
 If you have a Dart application which does not require local packages you
@@ -34,8 +34,8 @@ The following directory layout is used:
 The top-level directory `project` contains the `Dockerfile` and the two
 directories `app` and `pkg`. The `app` directory contains a Dart application
 with the main entrypoint in `bin/server.dart`. The packages referred from
-`app/pubspec.yaml` must be either packages on pub.dartlang.org or packages
-in the `pkg` directory referred to using a relative `path` dependency,
+`app/pubspec.yaml` must be either packages on [pub.dev](https://pub.dev) or
+packages in the `pkg` directory referred to using a relative `path` dependency,
 like this:
 
     name: dart_app
@@ -95,9 +95,9 @@ listening on port 8080):
 ## Accessing the Observatory
 
 The `dart-runtime-base` image enables the
-[Observatory](https://www.dartlang.org/tools/observatory/) for the  Dart
-VM running in the container. The Observatory is listening on the default
-port 8181. Just map that port to the host when running the app:
+[Observatory](https://dart-lang.github.io/observatory/) for the Dart VM running
+in the container. The Observatory is listening on the default port 8181. Just
+map that port to the host when running the app:
 
     docker run -d -p 8080:8080 -p 8181:8181 my-app
 
