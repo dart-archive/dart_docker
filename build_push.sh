@@ -59,11 +59,6 @@ function string_contains {
   [[ $2 == *$1* ]]
 }
 
-# Check whether $1 is not contained in $2.
-function string_not_contains {
-  [[ $2 != *$1* ]]
-}
-
 # Check whether the version is a stable version.
 function is_stable_version {
   [[ $CHANNEL == 'stable' ]]
