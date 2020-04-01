@@ -43,8 +43,8 @@ This script will build 4 different docker images
 Each with two tags 'latest' and the actual version.
 
 When the images have been build they are pushed to hub.docker.com. For
-developer or beta versions (versions which contain '-dev') the 'latest' tag will
-not be pushed."
+dev and beta versions (versions which contain '-dev') the 'dev' or
+'beta' tag will be pushed instead of the 'latest' tag."
 
   exit 1
 }
