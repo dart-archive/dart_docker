@@ -11,8 +11,8 @@
 # script will build and push images based on that version of Dart
 # installed from the Debian repository.
 #
-# For developer versions (versions which contain '-dev' the
-# 'latest' tag will not be pushed, instead a 'dev' tag will be pushed.
+# For dev and beta versions (versions which contain '-dev') the 'dev' or 'beta'
+# tag will be pushed instead of the 'latest' tag.
 #
 # To test without pushing to the official google namespace change the
 # NAMESPACE variable below to some other namespace on hub.docker.com.
@@ -43,8 +43,8 @@ This script will build 4 different docker images
 Each with two tags 'latest' and the actual version.
 
 When the images have been build they are pushed to hub.docker.com. For
-developer versions (versions which contain '-dev' the 'latest' tag will not
-be pushed."
+developer or beta versions (versions which contain '-dev') the 'latest' tag will
+not be pushed."
 
   exit 1
 }
@@ -64,21 +64,22 @@ function string_not_contains {
   [[ $2 != *$1* ]]
 }
 
-# Check whether the version is a developer version.
-function is_not_dev_version {
-  string_not_contains '-dev' $VERSION
+# Check whether the version is a stable version.
+function is_stable_version {
+  [[ $CHANNEL == 'stable' ]]
 }
 
-# Places the tags into an array at IMAGE_TAGS.
+# Adds the tags to the IMAGE_TAGS array.
 #
 # By default the image will be tagged as the version specified as well as the
-# major.minor. For stable it will also tag as major. For dev it will tag as dev.
+# major.minor. For stable it will also tag as major. For beta or dev it will also
+# be tagged as beta or dev respectively.
 function get_tags {
   IMAGE_TAGS=(
     $NAMESPACE/$IMAGE:$VERSION
   )
 
-  if is_not_dev_version;
+  if is_stable_version;
   then
     IMAGE_TAGS+=(
       $NAMESPACE/$IMAGE:$MAJOR_VERSION
@@ -86,8 +87,8 @@ function get_tags {
     )
   else
     IMAGE_TAGS+=(
-      $NAMESPACE/$IMAGE:dev
-      $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION-dev
+      $NAMESPACE/$IMAGE:$CHANNEL
+      $NAMESPACE/$IMAGE:$MAJOR_VERSION.$MINOR_VERSION-$CHANNEL
     )
   fi
 }
@@ -139,7 +140,7 @@ function push_image {
   get_tags $IMAGE
 
   # Add the latest tag to the push
-  if is_not_dev_version;
+  if is_stable_version;
   then
     IMAGE_TAGS+=($NAMESPACE/$IMAGE:latest)
   fi
@@ -152,7 +153,7 @@ function push_image {
 }
 
 # Expect two or three arguments, namespace dart_version [tag_version]
-if [ $# -ne 2 ] && [ $# -ne 3 ];
+if [ $# -ne 2 ] || [ $# -ne 3 ];
 then
   usage
 fi
@@ -160,6 +161,17 @@ fi
 NAMESPACE=$1
 DART_VERSION=$2
 VERSION=${3:-$DART_VERSION}
+case "$VERSION" in
+*-dev.*.0)
+  CHANNEL="dev"
+  ;;
+*-dev.*)
+  CHANNEL="beta"
+  ;;
+*)
+  CHANNEL="stable"
+  ;;
+esac
 
 # Read the version string. Patch version is not used
 IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$VERSION"
@@ -174,11 +186,6 @@ echo 'Building...'
 build_and_tag base dart
 build_and_tag runtime-base dart-runtime-base
 build_and_tag runtime dart-runtime
-
-# Before building hello run 'pub upgrade'.
-pushd $REPO_ROOT/hello
-pub update
-popd
 build_and_tag hello dart-hello
 
 echo 'Pushing...'

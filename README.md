@@ -31,7 +31,7 @@ $ ./build_push.sh google 1.9.3
 ```
 
 The script will only push the `:latest` tag if the version is a stable
-version. For developer versions only the version tag will be pushed.
+version. For developer and beta versions only the version tag will be pushed.
 
 The script receives the Dart SDK from the official Debian [repository][1].
 For the script to work the version you push must exist in the official
@@ -57,4 +57,4 @@ is used the script `build_custom.sh` can be used.
 [runtime-base]: https://registry.hub.docker.com/u/google/dart-runtime-base/
 [runtime]: https://registry.hub.docker.com/u/google/dart-runtime/
 [hello]: https://registry.hub.docker.com/u/google/dart-hello/
-[1]: https://www.dartlang.org/downloads/linux.html
+[1]: https://dart.dev/get-dart#install-a-debian-package
