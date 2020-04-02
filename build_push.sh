@@ -148,7 +148,7 @@ function push_image {
 }
 
 # Expect two or three arguments, namespace dart_version [tag_version]
-if [ $# -ne 2 ] || [ $# -ne 3 ];
+if ! [ $# -eq 2 ] || [ $# -eq 3 ];
 then
   usage
 fi
