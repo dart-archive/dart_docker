@@ -11,8 +11,8 @@
 # script will build and push images based on that version of Dart
 # installed from the Debian repository.
 #
-# For dev and beta versions (versions which contain '-dev') the 'dev' or 'beta'
-# tag will be pushed instead of the 'latest' tag.
+# For dev and beta versions the 'dev' or 'beta' tag will be pushed instead of
+# the 'latest' tag.
 #
 # To test without pushing to the official google namespace change the
 # NAMESPACE variable below to some other namespace on hub.docker.com.
@@ -22,10 +22,12 @@ set -e
 REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")
 
 function usage {
-  echo "Usage: $0 <namespace> <version> [tag_version]
+  echo "Usage: $0 <namespace> <channel> <version> [tag_version]
 
 <namespace> is the docker namespace (for production this should
 be 'google').
+
+<channel> is the release channel for the dart version (stable, beta, or dev)
 
 <version> is the dart version that should be built into the
 docker container.
@@ -147,26 +149,16 @@ function push_image {
   done
 }
 
-# Expect two or three arguments, namespace dart_version [tag_version]
-if ! ([ $# -eq 2 ] || [ $# -eq 3 ]);
+# Expect three or four arguments, namespace channel dart_version [tag_version]
+if ! ([ $# -eq 3 ] || [ $# -eq 4 ]);
 then
   usage
 fi
 
 NAMESPACE=$1
-DART_VERSION=$2
-VERSION=${3:-$DART_VERSION}
-case "$VERSION" in
-*-dev.*.0)
-  CHANNEL="dev"
-  ;;
-*-dev.*)
-  CHANNEL="beta"
-  ;;
-*)
-  CHANNEL="stable"
-  ;;
-esac
+CHANNEL=$2
+DART_VERSION=$3
+VERSION=${4:-$DART_VERSION}
 
 # Read the version string. Patch version is not used
 IFS='.' read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<<"$VERSION"

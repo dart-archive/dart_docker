@@ -17,17 +17,17 @@ them the official Docker registry.
 To push a new version run the following command:
 
 ```
-$ ./build_push.sh <namespace> <version>
+$ ./build_push.sh <namespace> <channel> <version>
 ```
 
 For the official image use the namespace `google`. For testing use a
 personal/temporary namespace. The version is the literal Dart version you
-want to build and push, e.g. `1.9.3` or `1.10.0-dev-1.0`.
+want to build and push, e.g. `1.9.3` or `2.10.0-1.0.dev`.
 
 Push the official images for 1.9.3 like this:
 
 ```
-$ ./build_push.sh google 1.9.3
+$ ./build_push.sh google stable 1.9.3
 ```
 
 The script will only push the `:latest` tag if the version is a stable
