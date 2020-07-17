@@ -4,7 +4,7 @@
 [docker](https://docker.com) base image that bundles the latest version
 of the [Dart SDK](https://dart.dev), installed from
 [dart.dev](https://dart.dev/get-dart), and 
-[Firefox-ESR](https://www.mozilla.org/en-US/firefox/enterprise/),
+[Firefox-ESR](https://www.mozilla.org/),
 installed from standard `apt-get` repositories.
 
 ## Usage

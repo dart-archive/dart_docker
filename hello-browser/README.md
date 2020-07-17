@@ -6,7 +6,7 @@ is a [Docker](https://docker.io) image to show a web test inside a browser.
 It is based on
 [`google/dart-browser`](https://hub.docker.com/r/google/dart-browser)
 base image, that runs tests inside
-[Firefox-ESR](https://www.mozilla.org/en-US/firefox/enterprise/).
+[Firefox-ESR](https://www.mozilla.org/).
 
 ## Run the Web Application tests
 
