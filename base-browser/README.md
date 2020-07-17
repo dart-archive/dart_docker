@@ -22,7 +22,7 @@ If you have a Web application directory with a `pubspec.yaml`,
 you can create a `Dockerfile` in the application directory with the
 following content:
 
-    FROM google/dart
+    FROM google/dart-browser
 
     WORKDIR /app
 
