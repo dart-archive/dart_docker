@@ -16,7 +16,7 @@ Run the following command to start the server application:
 ## Access the server
 
 If you are using boot2docker you need to access the server on the
-doot2docker host network. The command `boot2docker ip` will give the
+boot2docker host network. The command `boot2docker ip` will give the
 hosts address on that network.
 
     curl http://`boot2docker ip 2> /dev/null`:8080/version
