@@ -1,0 +1,8 @@
+
+FROM {{NAMESPACE}}/dart-browser
+
+WORKDIR /app
+
+ADD pubspec.* /app/
+RUN pub get
+ADD . /app

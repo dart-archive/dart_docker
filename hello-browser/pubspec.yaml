@@ -1,0 +1,10 @@
+name: hello_browser
+description: Hello (Tests with Browser)
+
+dependencies:
+  pedantic: any
+
+dev_dependencies:
+  build_runner: any
+  build_web_compilers: any
+  test: any
