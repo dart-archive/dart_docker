@@ -5,6 +5,7 @@ This repository contains the sources for the following
 [docker](https://docker.io) base images:
 
 - [`google/dart`][base]
+- [`google/dart-browser`][base-browser]
 - [`google/dart-runtime-base`][runtime-base]
 - [`google/dart-runtime`][runtime]
 - [`google/dart-hello`][hello]
@@ -54,6 +55,7 @@ For testing with a custom build of Dart where an already built Dart .deb file
 is used the script `build_custom.sh` can be used.
 
 [base]: https://registry.hub.docker.com/u/google/dart/
+[base-browser]: https://registry.hub.docker.com/u/google/dart-browser/
 [runtime-base]: https://registry.hub.docker.com/u/google/dart-runtime-base/
 [runtime]: https://registry.hub.docker.com/u/google/dart-runtime/
 [hello]: https://registry.hub.docker.com/u/google/dart-hello/

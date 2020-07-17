@@ -171,12 +171,14 @@ echo 'Pulling latest version of base image '$BASE_IMAGE
 docker pull $BASE_IMAGE
 echo 'Building...'
 build_and_tag base dart
+build_and_tag base-browser dart-browser
 build_and_tag runtime-base dart-runtime-base
 build_and_tag runtime dart-runtime
 build_and_tag hello dart-hello
 
 echo 'Pushing...'
 push_image dart
+push_image dart-browser
 push_image dart-runtime-base
 push_image dart-runtime
 push_image dart-hello
