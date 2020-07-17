@@ -1,0 +1,21 @@
+
+concurrency: 1
+
+override_platforms:
+  chrome:
+    settings:
+      headless: true
+  firefox:
+    settings:
+      arguments: -headless
+
+define_platforms:
+  firefox-esr:
+    name: Firefox-ESR
+    extends: firefox
+    settings:
+      executable:
+        linux: firefox-esr
+
+## Uncomment if you want 'firefox' as default testing platform
+#platforms: [firefox]

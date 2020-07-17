@@ -1,0 +1,30 @@
+# Copyright (c) 2014, the Dart project authors.  Please see the AUTHORS file
+# for details. All rights reserved. Use of this source code is governed by a
+# BSD-style license that can be found in the LICENSE file.
+#
+# Dockerfile for google/dart-runtime-base
+
+FROM {{NAMESPACE}}/dart
+
+RUN apt-get -q update && apt-get install -y firefox-esr xorg
+
+## Firefox won't run as root!
+## Adding an user that is able to use the browser:
+RUN adduser --disabled-password browser_user
+
+COPY run-as-browser_user.sh /bin/run-as-browser_user
+RUN chmod 755 /bin/run-as-browser_user && \
+  chown browser_user:root /bin/run-as-browser_user
+
+WORKDIR /app
+
+ADD --chown=browser_user:root dart_test.yaml /app/
+
+ONBUILD ADD --chown=browser_user:root pubspec.* /app/
+ONBUILD RUN run-as-browser_user pub get
+ONBUILD ADD --chown=browser_user:root . /app/
+ONBUILD RUN run-as-browser_user pub get --offline
+ONBUILD RUN chown -R browser_user:root /app/
+
+CMD ["pub", "run", "test"]
+ENTRYPOINT ["/bin/run-as-browser_user"]
