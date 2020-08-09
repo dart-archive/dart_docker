@@ -53,8 +53,8 @@ will be build locally, but the push to hub.docker.com will fail.
 For testing with a custom build of Dart where an already built Dart .deb file
 is used the script `build_custom.sh` can be used.
 
-[base]: https://registry.hub.docker.com/u/google/dart/
-[runtime-base]: https://registry.hub.docker.com/u/google/dart-runtime-base/
-[runtime]: https://registry.hub.docker.com/u/google/dart-runtime/
-[hello]: https://registry.hub.docker.com/u/google/dart-hello/
+[base]: https://registry.hub.docker.com/r/google/dart/
+[runtime-base]: https://registry.hub.docker.com/r/google/dart-runtime-base/
+[runtime]: https://registry.hub.docker.com/r/google/dart-runtime/
+[hello]: https://registry.hub.docker.com/r/google/dart-hello/
 [1]: https://dart.dev/get-dart#install-a-debian-package
