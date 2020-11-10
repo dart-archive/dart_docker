@@ -10,7 +10,7 @@ void main() {
   final port = int.tryParse(Platform.environment['PORT'] ?? '8080');
   final webFiles = new VirtualDirectory('web');
 
-  runZoned(() {
+  runZonedGuarded(() {
     HttpServer.bind('0.0.0.0', port).then((server) {
       server.listen((request) {
         if (request.uri.path == '/') {
@@ -28,7 +28,7 @@ void main() {
         }
       });
     });
-  }, onError: (e, stackTrace) {
+  }, (e, stackTrace) {
     print('Error processing request $e\n$stackTrace');
   });
 }

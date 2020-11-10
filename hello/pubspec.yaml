@@ -3,3 +3,5 @@ description: Hello
 dependencies:
   http_server: any
   pedantic: any
+environment:
+  sdk: '>=2.10.0 <3.0.0'
