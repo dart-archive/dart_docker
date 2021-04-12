@@ -3,7 +3,7 @@
 # BSD-style license that can be found in the LICENSE file.
 FROM gcr.io/google-appengine/debian10
 
-RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl git ca-certificates apt-transport-https
+RUN apt-get -q update && apt-get install --no-install-recommends -y -q curl git ca-certificates apt-transport-https && rm -rf /var/lib/apt/lists/*
 ADD dart.deb .
 RUN dpkg -i dart.deb && rm dart.deb
 
