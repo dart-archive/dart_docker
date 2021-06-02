@@ -3,7 +3,7 @@ dart_docker (deprecated)
 
 **NOTE**: These images are deprecated.
 
-Please consider using the new Docker Official images for Dart:
+Please consider using the new Docker Official Images for Dart:
 https://hub.docker.com/_/dart
 
 We plan on discontinuing these at a later stage.
