@@ -1,5 +1,17 @@
-dart_docker
+dart_docker (deprecated)
 ===========
+
+**NOTE**: These images are deprecated.
+
+Please consider using the new Docker Official Images for Dart:
+https://hub.docker.com/_/dart
+
+We plan on **discontinuing these after 31st December 2021**.
+Should there be something missing from the new images that you need,
+please file an issue in the issue tracker for the official images:
+https://github.com/dart-lang/dart-docker/issues
+
+---
 
 This repository contains the sources for the following
 [docker](https://docker.io) base images:
